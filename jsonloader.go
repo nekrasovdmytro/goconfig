@@ -7,16 +7,20 @@ import (
 
 type JsonConfigLoader struct {}
 
-func (l JsonConfigLoader) load(file string) interface{} {
+func (l JsonConfigLoader) load(file string) map[string]string {
 	data, err := ioutil.ReadFile(file)
 
 	if err != nil {
 		panic(err)
 	}
 
-	var result interface{}
+	var result map[string]string
 
-	json.Unmarshal(data, result)
+	err = json.Unmarshal(data, &result)
+
+	if err != nil {
+		panic(err)
+	}
 
 	return result
 }

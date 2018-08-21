@@ -1,22 +1,22 @@
 package goconfig
 
 type Configurator struct {
-	Data interface{}
+	Data map[string]string
 	loader ConfigLoader
 }
 
 type ConfigLoader interface {
-	load(filename string) interface{}
+	load(filename string) map[string]string
 }
 
-func (c *Configurator) setLoader(loader ConfigLoader) {
+func (c *Configurator) SetLoader(loader ConfigLoader) {
 	c.loader = loader
 }
 
-func (c *Configurator) load(filename string)  {
+func (c *Configurator) Load(filename string)  {
 	c.Data = c.loader.load(filename)
 }
 
-func (c *Configurator) getData() interface{}  {
+func (c *Configurator) GetData() interface{}  {
 	return c.Data
 }
